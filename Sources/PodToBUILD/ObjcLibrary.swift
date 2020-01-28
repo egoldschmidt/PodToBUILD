@@ -224,11 +224,11 @@ public struct ObjcLibrary: BazelTarget, UserConfigurable, SourceExcludable {
     /// to split C++ and ObjC apart.
     /// TODO: Add bazel-discuss thread on this matter.
     /// isSplitDep indicates if the library is a split language dependency
-    init(rootSpec: PodSpec? = nil, spec: PodSpec, extraDeps: [String] = [],
+    init(parentSpecs: [PodSpec] = [], spec: PodSpec, extraDeps: [String] = [],
             isSplitDep: Bool = false,
             sourceType: BazelSourceLibType = .objc) {
-        let fallbackSpec: ComposedSpec = ComposedSpec.create(fromSpecs: [rootSpec, spec].compactMap { $0 })
-        self.isTopLevelTarget = rootSpec == nil && isSplitDep == false
+        let fallbackSpec: ComposedSpec = ComposedSpec.create(fromSpecs: parentSpecs + [spec])
+        self.isTopLevelTarget = parentSpecs.isEmpty && isSplitDep == false
         let allSourceFiles = spec ^* liftToAttr(PodSpec.lens.sourceFiles)
 
         let includeFileTypes = sourceType == .cpp ? CppLikeFileTypes :
@@ -248,9 +248,9 @@ public struct ObjcLibrary: BazelTarget, UserConfigurable, SourceExcludable {
         self.publicHeaders = (fallbackSpec ^* ComposedSpec.lens.fallback(liftToAttr(PodSpec.lens.publicHeaders))).map{ Set($0) }
     
         let podName = GetBuildOptions().podName
-        self.name = computeLibName(rootSpec: rootSpec, spec: spec, podName:
+        self.name = computeLibName(parentSpecs: parentSpecs, spec: spec, podName:
                 podName, isSplitDep: isSplitDep, sourceType: sourceType)
-        let externalName = rootSpec?.name ?? spec.name
+        let externalName = parentSpecs.first?.name ?? spec.name
 
         let xcconfigTransformer =
             XCConfigTransformer.defaultTransformer(externalName: externalName,
@@ -466,12 +466,26 @@ public struct ObjcLibrary: BazelTarget, UserConfigurable, SourceExcludable {
                 return target is ObjcLibrary
             }.map { ($0 + "_hdrs").toSkylark() }
         }
-       
-        let podSupportHeaders = GlobNode(include: AttrSet<Set<String>>(basic: [PodSupportSystemPublicHeaderDir + "**/*"]),
-                                                         exclude: AttrSet<Set<String>>.empty).toSkylark()
+
+        let podSupportHeadersGlob = Set([PodSupportSystemPublicHeaderDir + "**/*"])
+        let podSupportHeaders = GlobNode(
+                include: AttrSet<Set<String>>(basic: podSupportHeadersGlob),
+                exclude: AttrSet<Set<String>>.empty
+        ).toSkylark()
+
+        // We need to explicitly exclude the pod support headers in case the headers include a bare `**/*` which would
+        // cause the pod support headers to be doubly included.
+        let headersWithoutPodSupport = GlobNode(
+                include: headers.include,
+                exclude: AttrSet(
+                        basic: (headers.exclude.basic ?? Set()).union(podSupportHeadersGlob),
+                        multi: headers.exclude.multi
+                )
+        )
+
         if lib.isTopLevelTarget {
             var exposedHeaders: SkylarkNode = podSupportHeaders .+.
-                headers.toSkylark() .+. depHdrs.toSkylark()
+                headersWithoutPodSupport.toSkylark() .+. depHdrs.toSkylark()
             inlineSkylark.append(.functionCall(
                 name: "filegroup",
                 arguments: [
@@ -527,7 +541,7 @@ public struct ObjcLibrary: BazelTarget, UserConfigurable, SourceExcludable {
                 ]
             ))
 
-        if lib.includes.count > 0 { 
+        if lib.includes.count > 0 {
             inlineSkylark.append(.functionCall(
                 name: "gen_includes",
                 arguments: [

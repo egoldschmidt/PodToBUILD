@@ -27,6 +27,9 @@ filegroup(
     [
       "FBSDKLoginKit/FBSDKLoginKit/**/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -50,14 +53,6 @@ gen_includes(
   name = "FBSDKLoginKit_includes",
   include = [
     "Vendor/FBSDKLoginKit/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "FBSDKLoginKit",
-  "FBSDKLoginKit_module_map",
-  "FBSDKLoginKit",
-  [
-    "FBSDKLoginKit_hdrs"
   ]
 )
 objc_library(

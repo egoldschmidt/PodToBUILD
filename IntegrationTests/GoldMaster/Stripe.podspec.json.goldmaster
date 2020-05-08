@@ -35,6 +35,9 @@ filegroup(
       "Stripe/*.h",
       "Stripe/PublicHeaders/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -56,14 +59,6 @@ gen_includes(
   name = "Stripe_includes",
   include = [
     "Vendor/Stripe/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "Stripe",
-  "Stripe_module_map",
-  "Stripe",
-  [
-    "Stripe_hdrs"
   ]
 )
 objc_library(

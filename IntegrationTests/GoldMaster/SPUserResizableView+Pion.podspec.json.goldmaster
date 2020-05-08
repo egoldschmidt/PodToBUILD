@@ -27,6 +27,9 @@ filegroup(
     [
       "SPUserResizableView/SPUserResizableView.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "SPUserResizableView+Pion_includes",
   include = [
     "Vendor/SPUserResizableView+Pion/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "SPUserResizableView+Pion",
-  "SPUserResizableView+Pion_module_map",
-  "SPUserResizableView+Pion",
-  [
-    "SPUserResizableView+Pion_hdrs"
   ]
 )
 objc_library(

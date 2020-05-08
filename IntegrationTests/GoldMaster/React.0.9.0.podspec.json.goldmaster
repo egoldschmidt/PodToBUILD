@@ -41,6 +41,9 @@ filegroup(
       "react-native-cli/**/*.hpp",
       "react-native-cli/**/*.hxx"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ) + [
     ":Core_hdrs"
@@ -66,14 +69,6 @@ gen_includes(
   name = "React_includes",
   include = [
     "Vendor/React/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "React",
-  "React_module_map",
-  "React",
-  [
-    "React_hdrs"
   ]
 )
 objc_library(

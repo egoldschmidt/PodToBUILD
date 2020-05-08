@@ -122,8 +122,12 @@ class ShellTask : NSObject {
     /// Launch a task and get the output
     func launch() -> CommandOutput {
         // Setup outputs
-        // FIXME: this causes issues on Catalina
-        let stream = false
+        let stream: Bool
+        if #available(OSX 10.14.5, *) {
+            stream = true
+        } else {
+            stream = false
+        }
         let stdout = Pipe()
         let stderr = Pipe()
 

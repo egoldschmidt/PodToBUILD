@@ -27,6 +27,9 @@ filegroup(
     [
       "SDK1.6.2/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -50,14 +53,6 @@ gen_includes(
   name = "Weixin_includes",
   include = [
     "Vendor/Weixin/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "Weixin",
-  "Weixin_module_map",
-  "Weixin",
-  [
-    "Weixin_hdrs"
   ]
 )
 objc_library(

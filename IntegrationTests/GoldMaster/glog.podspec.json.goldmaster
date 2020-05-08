@@ -33,6 +33,7 @@ filegroup(
       "src/glog/*.h"
     ],
     exclude = [
+      "pod_support/Headers/Public/**/*",
       "src/windows/**/*.h",
       "src/windows/**/*.hpp",
       "src/windows/**/*.hxx"
@@ -58,14 +59,6 @@ gen_includes(
   name = "glog_includes",
   include = [
     "Vendor/glog/src"
-  ]
-)
-gen_module_map(
-  "glog",
-  "glog_module_map",
-  "glog",
-  [
-    "glog_hdrs"
   ]
 )
 objc_library(

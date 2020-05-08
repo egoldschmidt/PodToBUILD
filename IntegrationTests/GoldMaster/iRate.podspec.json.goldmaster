@@ -28,6 +28,9 @@ filegroup(
     [
       "iRate/iRate.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -49,14 +52,6 @@ gen_includes(
   name = "iRate_includes",
   include = [
     "Vendor/iRate/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "iRate",
-  "iRate_module_map",
-  "iRate",
-  [
-    "iRate_hdrs"
   ]
 )
 objc_library(

@@ -27,6 +27,9 @@ filegroup(
     [
       "IBActionSheetSample/IBActionSheetSample/IBActionSheet.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "IBActionSheet_includes",
   include = [
     "Vendor/IBActionSheet/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "IBActionSheet",
-  "IBActionSheet_module_map",
-  "IBActionSheet",
-  [
-    "IBActionSheet_hdrs"
   ]
 )
 objc_library(

@@ -29,6 +29,9 @@ filegroup(
       "boost/**/*.hpp",
       "boost/**/*.hxx"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -50,14 +53,6 @@ gen_includes(
   name = "boost-for-react-native_includes",
   include = [
     "Vendor/boost-for-react-native/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "boost",
-  "boost-for-react-native_module_map",
-  "boost",
-  [
-    "boost-for-react-native_hdrs"
   ]
 )
 objc_library(

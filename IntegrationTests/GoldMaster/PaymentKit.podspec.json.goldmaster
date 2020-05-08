@@ -27,6 +27,9 @@ filegroup(
     [
       "PaymentKit/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "PaymentKit_includes",
   include = [
     "Vendor/PaymentKit/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "PaymentKit",
-  "PaymentKit_module_map",
-  "PaymentKit",
-  [
-    "PaymentKit_hdrs"
   ]
 )
 objc_library(

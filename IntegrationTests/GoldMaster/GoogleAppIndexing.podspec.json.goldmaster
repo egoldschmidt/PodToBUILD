@@ -31,6 +31,9 @@ filegroup(
       "Changelog/**/*.hpp",
       "Changelog/**/*.hxx"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -54,14 +57,6 @@ gen_includes(
   name = "GoogleAppIndexing_includes",
   include = [
     "Vendor/GoogleAppIndexing/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "GoogleAppIndexing",
-  "GoogleAppIndexing_module_map",
-  "GoogleAppIndexing",
-  [
-    "GoogleAppIndexing_hdrs"
   ]
 )
 objc_library(

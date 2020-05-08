@@ -29,6 +29,9 @@ filegroup(
       "AsyncDisplayKit/**/*.hpp",
       "AsyncDisplayKit/**/*.hxx"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ) + [
     ":PINRemoteImage_hdrs",
@@ -60,14 +63,6 @@ gen_includes(
   name = "Texture_includes",
   include = [
     "Vendor/Texture/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "AsyncDisplayKit",
-  "Texture_module_map",
-  "AsyncDisplayKit",
-  [
-    "Texture_hdrs"
   ]
 )
 objc_library(

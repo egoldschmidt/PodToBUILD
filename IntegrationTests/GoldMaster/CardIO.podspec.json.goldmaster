@@ -27,6 +27,9 @@ filegroup(
     [
       "CardIO/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -50,14 +53,6 @@ gen_includes(
   name = "CardIO_includes",
   include = [
     "Vendor/CardIO/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "CardIO",
-  "CardIO_module_map",
-  "CardIO",
-  [
-    "CardIO_hdrs"
   ]
 )
 objc_library(

@@ -46,7 +46,8 @@ filegroup(
         ],
         exclude = [
           "FBSDKShareKit/FBSDKShareKit/FBSDKDeviceShareButton.h",
-          "FBSDKShareKit/FBSDKShareKit/FBSDKDeviceShareViewController.h"
+          "FBSDKShareKit/FBSDKShareKit/FBSDKDeviceShareViewController.h",
+          "pod_support/Headers/Public/**/*"
         ],
         exclude_directories = 1
       ),
@@ -80,6 +81,9 @@ filegroup(
           "FBSDKShareKit/FBSDKShareKit/Internal/FBSDKShareUtility.h",
           "FBSDKShareKit/FBSDKShareKit/Internal/FBSDKVideoUploader.h"
         ],
+        exclude = [
+          "pod_support/Headers/Public/**/*"
+        ],
         exclude_directories = 1
       )
     }
@@ -105,14 +109,6 @@ gen_includes(
   name = "FBSDKShareKit_includes",
   include = [
     "Vendor/FBSDKShareKit/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "FBSDKShareKit",
-  "FBSDKShareKit_module_map",
-  "FBSDKShareKit",
-  [
-    "FBSDKShareKit_hdrs"
   ]
 )
 objc_library(

@@ -136,6 +136,9 @@ filegroup(
       "UICollectionViewLeftAlignedLayout/**/*.hpp",
       "UICollectionViewLeftAlignedLayout/**/*.hxx"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ) + [
     ":UICollectionViewLeftAlignedLayout_cxx_hdrs"
@@ -162,14 +165,6 @@ gen_includes(
   name = "UICollectionViewLeftAlignedLayout_includes",
   include = [
     "Vendor/UICollectionViewLeftAlignedLayout/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "UICollectionViewLeftAlignedLayout",
-  "UICollectionViewLeftAlignedLayout_module_map",
-  "UICollectionViewLeftAlignedLayout",
-  [
-    "UICollectionViewLeftAlignedLayout_hdrs"
   ]
 )
 objc_library(

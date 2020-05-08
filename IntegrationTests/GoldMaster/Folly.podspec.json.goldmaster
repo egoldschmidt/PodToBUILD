@@ -29,6 +29,9 @@ filegroup(
       "folly/detail/*.h",
       "folly/portability/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -56,14 +59,6 @@ gen_includes(
     "Vendor/Folly",
     "Vendor/boost-for-react-native",
     "Vendor/DoubleConversion"
-  ]
-)
-gen_module_map(
-  "folly",
-  "Folly_module_map",
-  "folly",
-  [
-    "Folly_hdrs"
   ]
 )
 objc_library(

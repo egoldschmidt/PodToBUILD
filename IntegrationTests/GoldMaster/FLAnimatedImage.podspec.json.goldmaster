@@ -27,6 +27,9 @@ filegroup(
     [
       "FLAnimatedImage/**/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "FLAnimatedImage_includes",
   include = [
     "Vendor/FLAnimatedImage/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "FLAnimatedImage",
-  "FLAnimatedImage_module_map",
-  "FLAnimatedImage",
-  [
-    "FLAnimatedImage_hdrs"
   ]
 )
 objc_library(

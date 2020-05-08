@@ -27,6 +27,9 @@ filegroup(
     [
       "kingpin/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "kingpin_includes",
   include = [
     "Vendor/kingpin/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "kingpin",
-  "kingpin_module_map",
-  "kingpin",
-  [
-    "kingpin_hdrs"
   ]
 )
 objc_library(

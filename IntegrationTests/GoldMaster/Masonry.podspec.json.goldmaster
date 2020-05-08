@@ -45,6 +45,9 @@ filegroup(
     [
       "Masonry/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -66,14 +69,6 @@ gen_includes(
   name = "Masonry_includes",
   include = [
     "Vendor/Masonry/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "Masonry",
-  "Masonry_module_map",
-  "Masonry",
-  [
-    "Masonry_hdrs"
   ]
 )
 objc_library(

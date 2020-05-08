@@ -27,6 +27,9 @@ filegroup(
     [
       "RadarKit/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "RadarKit_includes",
   include = [
     "Vendor/RadarKit/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "RadarKit",
-  "RadarKit_module_map",
-  "RadarKit",
-  [
-    "RadarKit_hdrs"
   ]
 )
 objc_library(

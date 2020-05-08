@@ -230,7 +230,8 @@ filegroup(
         exclude = [
           "Classes/osx/**/*.h",
           "Classes/osx/**/*.hpp",
-          "Classes/osx/**/*.hxx"
+          "Classes/osx/**/*.hxx",
+          "pod_support/Headers/Public/**/*"
         ],
         exclude_directories = 1
       ),
@@ -243,7 +244,8 @@ filegroup(
         exclude = [
           "Classes/ios/**/*.h",
           "Classes/ios/**/*.hpp",
-          "Classes/ios/**/*.hxx"
+          "Classes/ios/**/*.hxx",
+          "pod_support/Headers/Public/**/*"
         ],
         exclude_directories = 1
       )
@@ -273,14 +275,6 @@ gen_includes(
   name = "youtube-ios-player-helper_includes",
   include = [
     "Vendor/youtube-ios-player-helper/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "youtube-ios-player-helper",
-  "youtube-ios-player-helper_module_map",
-  "youtube_ios_player_helper",
-  [
-    "youtube-ios-player-helper_hdrs"
   ]
 )
 objc_library(

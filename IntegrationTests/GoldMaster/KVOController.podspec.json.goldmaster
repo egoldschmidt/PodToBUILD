@@ -27,6 +27,9 @@ filegroup(
     [
       "FBKVOController/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -48,14 +51,6 @@ gen_includes(
   name = "KVOController_includes",
   include = [
     "Vendor/KVOController/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "KVOController",
-  "KVOController_module_map",
-  "KVOController",
-  [
-    "KVOController_hdrs"
   ]
 )
 objc_library(

@@ -30,6 +30,9 @@ filegroup(
       "FBSDKMessengerShareKit/**/*.hxx",
       "FBSDKMessengerShareKit/FBSDKMessengerShareKit/**/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ),
   visibility = [
@@ -51,14 +54,6 @@ gen_includes(
   name = "FBSDKMessengerShareKit_includes",
   include = [
     "Vendor/FBSDKMessengerShareKit/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "FBSDKMessengerShareKit",
-  "FBSDKMessengerShareKit_module_map",
-  "FBSDKMessengerShareKit",
-  [
-    "FBSDKMessengerShareKit_hdrs"
   ]
 )
 objc_library(

@@ -117,6 +117,9 @@ filegroup(
     [
       "Source/**/*.h"
     ],
+    exclude = [
+      "pod_support/Headers/Public/**/*"
+    ],
     exclude_directories = 1
   ) + [
     ":PINOperation_cxx_hdrs"
@@ -142,14 +145,6 @@ gen_includes(
   name = "PINOperation_includes",
   include = [
     "Vendor/PINOperation/pod_support/Headers/Public/"
-  ]
-)
-gen_module_map(
-  "PINOperation",
-  "PINOperation_module_map",
-  "PINOperation",
-  [
-    "PINOperation_hdrs"
   ]
 )
 objc_library(
